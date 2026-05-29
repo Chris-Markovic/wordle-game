@@ -4,7 +4,7 @@ import requests, random
 class DictionaryAPI:
     def __init__(self):
         self.dictionary_url = "https://api.dictionaryapi.dev/api/v2/entries/en/"
-        self.random_word_url = "https://api.datamuse.com/words?sp=?????&max=500"
+        self.random_word_url = "https://api.datamuse.com/words?sp=?????&max=500&topics=common"
 
     def get_target_word(self):
         response = requests.get(self.random_word_url, timeout=5)

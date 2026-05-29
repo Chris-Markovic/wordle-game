@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wordle: GAME OVER</title>
+</head>
+<body>
+    {% extends 'wordle_app/base.html' %}
+    {% block content %}
+    <h2>
+        {% if won %}You won!{% else %}Game over!{% endif %}
+    </h2>
+    <p>The word was: <strong>{{ session.target_word }}</strong></p>
+    <p class="text-muted">{{ session.word_definition }}</p>
+    <p>You used {{ guesses.count }} out of 6 guesses.</p>
+    <hr>
+    {% for guess in guesses %}
+        <div class="d-flex gap-1 mb-1">
+            {% for pair in guess.get_letter_color_pairs %}
+                <div class="d-flex align-items-center justify-content-center fw-bold text-white"
+                    style="width:45px;height:45px;font-size:1.2rem;
+                    background-color:
+                        {% if pair.1 == 'G' %}#538d4e
+                        {% elif pair.1 == 'O' %}#b59f3b
+                        {% else %}#3a3a3c{% endif %};">
+                    {{ pair.0 }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3">Play Again</a>
+    {% endblock %}
+
+</body>
+</html>

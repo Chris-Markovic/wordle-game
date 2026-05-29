@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wordle: STATISTICS</title>
+</head>
+<body>
+    {% extends 'wordle_app/base.html' %}
+    {% block content %}
+    <h2>Your Statistics</h2>
+    <hr>
+    <p>Total games played: <strong>{{ stats.total_games }}</strong></p>
+    <p>Games won: <strong>{{ stats.games_won }}</strong></p>
+    <p>Current streak: <strong>{{ stats.current_streak }}</strong></p>
+    <p>Win rate: <strong>{{ winrate }}%</strong></p>
+    <a href="{% url 'home' %}" class="btn btn-primary mt-2">Play</a>
+    {% endblock %}
+</body>
+</html>

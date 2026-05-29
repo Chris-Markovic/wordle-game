@@ -22,7 +22,7 @@ class User(AbstractUser):
         stats.save()
 
 class Session(models.Model):
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='sessions')
     target_word = models.CharField(max_length=5)
     word_definition = models.TextField(blank=True)
     start_time = models.DateTimeField(auto_now_add=True)
@@ -44,35 +44,36 @@ class Session(models.Model):
 
 
 class Guess(models.Model):
-    session = models.ForeignKey('Session', on_delete=models.CASCADE)
+    session = models.ForeignKey('Session', on_delete=models.CASCADE, related_name='guesses')
     guessed_word = models.CharField(max_length=5)
     result_colors = models.CharField(max_length=5)
     time_stamp = models.DateTimeField(auto_now_add=True)
 
-
     def check_guess(self, target_word):
-        result = []
+        result = [None, None, None, None, None]
         target = list(target_word.upper())
         guess = list(self.guessed_word.upper())
 
         for i in range(5):
             if guess[i] == target[i]:
-                result.append("G")
+                result[i] = 'G'
                 target[i] = None
-            else:
-                result.append(None)
 
         for i in range(5):
             if result[i] is None:
                 if guess[i] in target:
-                    result.append("O")
+                    result[i] = 'O'
                     target[target.index(guess[i])] = None
                 else:
-                    result.append("X")
-                result[i] = result.pop
-        self.result_colors = "".join(result)
+                    result[i] = 'X'
+
+        self.result_colors = ''.join(result)
         self.save()
         return self.result_colors
+
+    def get_letter_color_pairs(self):
+        return list(zip(self.guessed_word, self.result_colors))
+
 
 
 
@@ -85,7 +86,7 @@ class Wordlist(models.Model):
 
 
 class Statistics(models.Model):
-    user = models.OneToOneField('User', on_delete=models.CASCADE)
+    user = models.OneToOneField('User', on_delete=models.CASCADE, related_name='statistics')
     total_games = models.IntegerField(default=0)
     games_won = models.IntegerField(default=0)
     current_streak = models.IntegerField(default=0)
