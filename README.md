@@ -9,7 +9,7 @@ green (correct position), orange (wrong position), or grey (not in word).
 ## Features
 - User registration and login
 - Unlimited games
-- Word validation with dictionary API
+- Word validation with dictionary API - the app checks whether the guess is a real word
 - Game history for each user
 - Win/loss statistics and win streak tracking
 - Admin panel for making admin changes
@@ -52,4 +52,4 @@ pytest = all tests
 pytest tests/test_game_logic.py = run a specific test
 
 ## Demo video link
-[]
+https://youtu.be/A02uV8Gx_YY
