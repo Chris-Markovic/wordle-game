@@ -3,8 +3,9 @@
 # Wordle
 
 A browser-based Wordle clone built with Django.
-Guess the 5-letter word in 6 attempts. Letters are highlighted
-green (correct position), orange (wrong position), or grey (not in word).
+Guess the 5-letter word in 6 attempts. After each guess, letters are highlighted
+green (correct position), orange (wrong position), or grey (not in word). You are able to view your game history 
+and statistics. The admin can edit/manage all of the users and other data and tables.
 
 ## Features
 - User registration and login
