@@ -1,5 +1,7 @@
 # Wordle
 
+## Demo video available at the bottom
+
 A browser-based Wordle clone built with Django.
 Guess the 5-letter word in 6 attempts. After each guess, letters are highlighted
 green (correct position), orange (wrong position), or grey (not in word). You are able to view your game history 
